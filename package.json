@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "craco build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --config ./.eslintrc.js --ignore-path ./.eslintignore ./src/**/*"
@@ -27,6 +27,7 @@
     "web-vitals": "^1.0.1"
   },
   "devDependencies": {
+    "@craco/craco": "^6.1.1",
     "eslint": "^7.5.0",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
