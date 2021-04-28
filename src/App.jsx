@@ -1,6 +1,7 @@
 /*global chrome*/
 
 import React, {useEffect, useState} from 'react';
+import { Wallet } from './components';
 
 import logo from './logo.svg';
 import './App.css';
@@ -22,9 +23,7 @@ function AppHeader() {
   // Using available browser api which is chrome extension api
   useEffect(() => {
     const queryInfo = { active: true, lastFocusedWindow: true };
-
-
-
+    
     chrome.tabs && chrome.tabs.query(queryInfo, tabs => {
       const url = tabs[0].url;
       setUrl(url);
@@ -45,6 +44,7 @@ function AppHeader() {
       >
         Learn React
       </a>
+      <Wallet />
     </header>
   );
 }
