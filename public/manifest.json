@@ -1,0 +1,24 @@
+{
+  "name": "Potato Wallet",
+  "short_name": "wallet",
+  "description": "Wallet for web3 apps",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "notifications"
+  ],
+  "optional_permissions": [
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["./static/js/content.js"],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ]
+}
