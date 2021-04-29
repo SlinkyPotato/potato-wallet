@@ -20,7 +20,7 @@ export default function Wallet(props) {
     return (
         <span>
             <p>private Key: {mnemonic.privateKey}</p>
-            <p>mnemonic: {mnemonic.mnemonic.phrase}</p>
+            <p>mnemonic: {mnemonic.mnemonic!= null ? mnemonic.mnemonic.phrase : '...'}</p>
             <p>address: {mnemonic.address}</p>
         </span>
     );
