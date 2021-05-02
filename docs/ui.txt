@@ -1,0 +1,9 @@
+Create New Wallet
+ - (buttone click)
+ 
+Restore Wallet
+ - Seed
+ - Private Key
+
+Login
+ - password

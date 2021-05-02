@@ -1,6 +1,8 @@
 /*global chrome*/
 
 import React, {useEffect, useState} from 'react';
+import { Wallet } from './components';
+import { Switch, Link, Route, MemoryRouter } from 'react-router-dom';
 
 import logo from './logo.svg';
 import './App.css';
@@ -10,20 +12,41 @@ function App() {
 
   return (
     <div className="App">
-      <AppHeader />
+      <MemoryRouter initialEntries={['/landing-page']}>
+        <Switch>
+          <Route path="/landing-page">
+            <LandingPage />
+          </Route>
+          <Route path="/wallet">
+            <Navigation />
+            <Wallet />
+          </Route>
+        </Switch>
+      </MemoryRouter>
     </div>
   );
 }
 
-function AppHeader() {
+function Navigation() {
+  return (
+    <div>
+      <nav>
+        <ul>
+          <li><Link to="/landing-page">Landing Page</Link></li>
+          <li><Link to="/wallet">Wallet</Link></li>
+        </ul>
+      </nav>
+    </div>
+  );
+}
+
+function LandingPage() {
   const [url, setUrl] = useState('');
   const [responseFromContent, setResponseFromContent] = useState('');
 
   // Using available browser api which is chrome extension api
   useEffect(() => {
     const queryInfo = { active: true, lastFocusedWindow: true };
-
-
 
     chrome.tabs && chrome.tabs.query(queryInfo, tabs => {
       const url = tabs[0].url;
