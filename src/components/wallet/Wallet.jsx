@@ -5,6 +5,7 @@ import ReactTooltip from 'react-tooltip';
 import { ethers } from 'ethers';
 import localforage from 'localforage';
 import { NETWORKS } from './../../common/networks';
+import { Modal } from 'bootstrap';
 
 export default function Wallet(props) {
     const RECOVERY_METHOD_PRIV_KEY = 'PRIVATE_KEY';
@@ -82,14 +83,29 @@ export default function Wallet(props) {
                     <input type="password" id="confirmPass" rows="3" className="form-control" 
                         value={cPass} onChange={(e) => setCPass(e.target.value)}></input>
                 </div>
-                <button type="submit" className="btn btn-primary">{recoveryMethod === RECOVERY_METHOD_NEW_WALLET ? 'Create' : 'Recover'}</button>
+                <button type="submit" 
+                    className="btn btn-primary"
+                    data-bs-toggle="modal" data-bs-target="#walletModal">
+                    {recoveryMethod === RECOVERY_METHOD_NEW_WALLET ? 'Create' : 'Recover'}
+                </button>
             </form>
-            <div className="row">
-                <div>
-                    <p>private Key: {userWallet.privateKey}</p>
-                    <p>mnemonic: {userWallet.mnemonic!= null ? userWallet.mnemonic.phrase : '...'}</p>
-                    <p>address: {userWallet.address}</p>
-                    <p>which: {userWallet.which}</p>
+            <div className="modal" id="walletModal" tabIndex="-1" aria-labelledby="walletModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="walletModalLabel">Wallet Created</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            <p>private Key: {userWallet.privateKey}</p>
+                            <p>mnemonic: {userWallet.mnemonic!= null ? userWallet.mnemonic.phrase : ''}</p>
+                            <p>address: {userWallet.address}</p>
+                            <p>which: {userWallet.which}</p>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <ReactTooltip />
@@ -98,6 +114,8 @@ export default function Wallet(props) {
     
     function useRecoverWallet(event) {
         event.preventDefault();
+        const walletModal = Modal.getInstance(document.getElementById('walletModal'));
+        walletModal.show();
         let userWallet = null;
         const provider = new ethers.getDefaultProvider(NETWORKS.goerli.rpcUrl);
 
