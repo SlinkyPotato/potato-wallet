@@ -12,7 +12,7 @@ function App() {
 
   return (
     <div className="App">
-      <MemoryRouter initialEntries={['/landing-page']}>
+      <MemoryRouter initialEntries={['/wallet']}>
         <Switch>
           <Route path="/landing-page">
             <LandingPage />
@@ -42,7 +42,6 @@ function Navigation() {
 
 function LandingPage() {
   const [url, setUrl] = useState('');
-  const [responseFromContent, setResponseFromContent] = useState('');
 
   // Using available browser api which is chrome extension api
   useEffect(() => {
